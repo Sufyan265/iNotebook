@@ -17,15 +17,18 @@ function Notes(props) {
 
     const navigate = useNavigate();
     useEffect(() => {
-        if (localStorage.getItem("token")) {
-            getNotes();
-            
-            getUser();
-            
-        } else {
-            navigate("/login")
+        const authUser = () => {
+            if (localStorage.getItem("token")) {
+                getNotes();
+
+                getUser();
+
+            } else {
+                navigate("/login")
+            }
         }
-    }, [navigate, getNotes, getUser])
+        authUser();
+    }, [navigate])
     return (
         <>
             <div className="wrapper d-flex align-items-stretch">

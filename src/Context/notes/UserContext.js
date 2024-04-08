@@ -55,7 +55,7 @@ export const UserProvider = (props) => {
             });
 
             const user = await response.json();
-            if (user.success) {
+            if (user.user && user.success) {
                 // console.log(user)
                 setUserData(user)
             }
