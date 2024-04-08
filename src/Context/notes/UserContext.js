@@ -3,7 +3,8 @@ import React, { createContext, useState } from 'react';
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-    const host = "http://localhost:5000";
+    // const host = "http://localhost:5000";
+    const host = "https://inotebook-backend-tau.vercel.app";
 
     const [errorMessage, setErrorMessage] = useState("An error has occurred");
 
