@@ -17,6 +17,7 @@ function App() {
     setAlert({ msg, type, })
     setTimeout(() => { setAlert(null) }, 3000)
   }
+
   return (
     <>
       <UserProvider>

@@ -2,14 +2,15 @@ import React, { useContext, useState } from 'react'
 import "./loginStyle.css"
 import noteContext from '../Context/notes/noteContext';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/notes/UserContext';
 
 const Login = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://inotebook-backend-tau.vercel.app";
-
     let navigate = useNavigate();
     // console.log(navigate)
-
+    
+    const { setProgress } = useContext(UserContext);
     const context = useContext(noteContext)
     const { catchError, handleError, } = context;
     const { showAlert } = props;
@@ -21,6 +22,7 @@ const Login = (props) => {
         event.preventDefault();
         // API Call ↓
         try {
+            setProgress(10);
             const response = await fetch(`${host}/api/auth/login`, {
                 method: "POST",
                 headers: {
@@ -28,7 +30,7 @@ const Login = (props) => {
                 },
                 body: JSON.stringify({ email: credentials.email, password: credentials.password }),
             });
-
+            setProgress(40);
             const user = await response.json();
             if (user.success) {
                 // console.log(user)
@@ -36,12 +38,14 @@ const Login = (props) => {
                 localStorage.setItem("token", user.authToken)
                 navigate("/")
                 showAlert("success", "Logged in successfully");
+                setProgress(80);
             } else {
                 // console.log(user)
                 showAlert("danger", user.error);
             }
 
-            handleError(false)
+            handleError(false);
+            setProgress(100);
         } catch (error) {
             // console.log(error)
             catchError(error)

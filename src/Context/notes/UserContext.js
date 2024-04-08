@@ -7,6 +7,7 @@ export const UserProvider = (props) => {
     const host = "https://inotebook-backend-tau.vercel.app";
 
     const [errorMessage, setErrorMessage] = useState("An error has occurred");
+    const [progress, setProgress] = useState(0);
 
     const demoUser = {
         "success": false,
@@ -41,6 +42,7 @@ export const UserProvider = (props) => {
             // console.log('Error during fetching notes:', error.message);
             setErrorMessage('Error during fetching notes:', error.message);
         }
+        setProgress(100);
     }
 
     const getUser = async () => {
@@ -53,13 +55,11 @@ export const UserProvider = (props) => {
                     "auth-token": localStorage.getItem("token")
                 },
             });
-
             const user = await response.json();
             if (user.user && user.success) {
                 // console.log(user)
                 setUserData(user)
             }
-
             handleError(false)
         } catch (error) {
             // console.log(error)
@@ -75,6 +75,9 @@ export const UserProvider = (props) => {
 
             getUser,
             userData,
+
+            progress,
+            setProgress,
         }}>
             {props.children}
         </UserContext.Provider>

@@ -22,7 +22,6 @@ function Notes(props) {
                 getNotes();
 
                 getUser();
-
             } else {
                 navigate("/login")
             }

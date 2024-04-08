@@ -6,7 +6,7 @@ const NoteState = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://inotebook-backend-tau.vercel.app";
 
-    const { catchError, handleError, errorMessage } = useContext(UserContext);
+    const { catchError, handleError, errorMessage, setProgress } = useContext(UserContext);
 
     // const notesInitial = [
     //     {
@@ -101,6 +101,7 @@ const NoteState = (props) => {
     const getNotes = async () => {
         // API Call ↓
         try {
+            setProgress(10)
             const response = await fetch(`${host}/api/notes/getallnotes`, {
                 method: "GET",
                 headers: {
@@ -111,11 +112,14 @@ const NoteState = (props) => {
             if (!response.ok) {
                 throw new Error(`${response}`);
             }
+            setProgress(40)
             const data = await response.json();
             // console.log(data)
             const sortedData = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+            setProgress(60)
             setNotes(sortedData)
             handleError(false)
+            setProgress(100)
         } catch (error) {
             catchError(error);
         }
@@ -125,6 +129,7 @@ const NoteState = (props) => {
     const addNote = async () => {
         // API Call ↓
         try {
+            setProgress(10);
             const response = await fetch(`${host}/api/notes/addnote`, {
                 method: "POST",
                 headers: {
@@ -133,6 +138,7 @@ const NoteState = (props) => {
                 },
                 body: JSON.stringify({ title: "Untitled Note", description: "Blank", tag: "persnel" }),
             });
+            setProgress(60);
             const data = await response.json();
             // console.log(data)
 
@@ -151,7 +157,7 @@ const NoteState = (props) => {
             setNotes(updatedNotes);
 
             setNewNote({ title: "", description: "", id: data._id })
-
+            setProgress(100);
         } catch (error) {
             catchError(error);
         }
@@ -161,6 +167,7 @@ const NoteState = (props) => {
     const deleteNote = async (id) => {
         // API Call ↓
         try {
+            setProgress(10);
             await fetch(`${host}/api/notes/deletenote/${id}`, {
                 method: "DELETE",
                 headers: {
@@ -170,12 +177,12 @@ const NoteState = (props) => {
             });
             // const data = await response.json();
             // console.log(data)
-
+            setProgress(60);
             const filteredNotes = notes.filter((item) => { return item._id !== id })
             setNotes(filteredNotes)
             setNewNote({ title: "", description: "", id: "" })
             console.log("The Note has been deleted by the id of: " + id)
-
+            setProgress(100);
         } catch (error) {
             catchError(error);
         }
@@ -185,6 +192,7 @@ const NoteState = (props) => {
     const editNote = async (id) => {
         // API Call ↓
         try {
+            setProgress(30);
             await fetch(`${host}/api/notes/updatenote/${id}`, {
                 method: "PUT",
                 headers: {
@@ -194,7 +202,8 @@ const NoteState = (props) => {
                 body: JSON.stringify({ title: newNote.title, description: newNote.description, tag: "persnel" }),
             });
             // const data = response.json();
-            // console.log("Note edited: ", newNote.title,  newNote.description)            
+            // console.log("Note edited: ", newNote.title,  newNote.description)     
+            setProgress(100);       
         } catch (error) {
             catchError(error);
         }

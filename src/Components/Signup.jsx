@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import "./loginStyle.css"
 import noteContext from '../Context/notes/noteContext';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../Context/notes/UserContext';
 
 // import { FaExclamationCircle } from 'react-icons/fa';
 
@@ -10,8 +11,8 @@ const Login = (props) => {
     const host = "https://inotebook-backend-tau.vercel.app";
 
     let navigate = useNavigate();
-    // console.log(navigate)
 
+    const { setProgress } = useContext(UserContext);
     const context = useContext(noteContext)
     const { catchError, handleError, } = context;
     const { showAlert } = props;
@@ -26,6 +27,7 @@ const Login = (props) => {
         const genderValue = credentials.gender === "" ? "Unset" : credentials.gender;
         // API Call ↓
         try {
+            setProgress(10);
             const response = await fetch(`${host}/api/auth/createuser`, {
                 method: "POST",
                 headers: {
@@ -33,11 +35,11 @@ const Login = (props) => {
                 },
                 body: JSON.stringify({ name: credentials.name, email: credentials.email, password: credentials.password, gender: genderValue }),
             });
-
+            setProgress(40);
             const user = await response.json();
-
             if (credentials.password !== credentials.cPassword || credentials.cPassword !== credentials.password) {
                 // setPaswwordError(credentials.password !== credentials.cPassword);
+                setProgress(100);
                 return setPaswwordError(true)
             }
             // else if (name === 'cPassword') {
@@ -51,16 +53,19 @@ const Login = (props) => {
                 // localStorage.setItem("token", user.authToken)
                 navigate("/login");
                 showAlert("success", "Account created successfuly");
+                setProgress(80);
             } else {
                 // console.log(user)
                 if (user.alreadyExist) {
                     showAlert("warning", user.error);
+                    setProgress(100);
                     return navigate("/login")
                 }
                 showAlert("danger", user.error);
             }
 
             handleError(false)
+            setProgress(100);
         } catch (error) {
             // console.log(error)e
             catchError(error)

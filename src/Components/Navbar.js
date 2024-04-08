@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from 'react'
 import { UserContext } from '../Context/notes/UserContext';
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import LoadingBar from 'react-top-loading-bar';
 
 import maleProfileLogo from "./Images/male-avatar.svg";
 import femaleProfileLogo from "./Images/female-avatar.svg";
 
 const Navbar = () => {
     const context = useContext(UserContext)
-    const { userData } = context;
+    const { userData, progress } = context;
     const navigate = useNavigate();
 
     let location = useLocation();
@@ -53,6 +54,7 @@ const Navbar = () => {
 
     return (
         <>
+            <LoadingBar color='#6eefcb' progress={progress} />
             <nav className="navbar navbar-expand-lg navbarStyle" style={{ backgroundColor: "rgb(243 163 48)" }} data-bs-theme="dark">
                 <div className="container-fluid">
                     <span className='listItemToggle' onClick={handleListToggle} >
@@ -102,6 +104,7 @@ const Navbar = () => {
                     </div>
                 </div>
             </nav>
+
         </>
     )
 }
