@@ -1,0 +1,39 @@
+.alert-msg {
+    /* display: block; */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    /* background-color: #f00; */
+    /* color: #fff; */
+    padding: 10px;
+    z-index: 9999;
+    margin: 0 15px 20px 0;
+    width: fit-content;
+    min-width: 13rem;
+}
+
+.toast:not(.show) {
+    display: block;
+}
+
+.alertAnimationIn {
+    animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+@media (max-width: 992px) {
+    .alert-msg {
+        padding: 3px;
+        margin: 0 10px 15px 0;
+    }
+}
