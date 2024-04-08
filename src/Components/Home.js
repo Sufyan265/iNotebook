@@ -25,7 +25,7 @@ function Notes(props) {
         } else {
             navigate("/login")
         }
-    }, [navigate])
+    }, [navigate, getNotes, getUser])
     return (
         <>
             <div className="wrapper d-flex align-items-stretch">
