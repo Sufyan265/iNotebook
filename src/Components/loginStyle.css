@@ -325,3 +325,10 @@
   background: #000;
   border-radius: 50%;
 }
+
+@media (max-width: 992px) {
+  .profile-content {
+    right: -127px;
+    top: calc(100% + -48px);
+  }
+}
