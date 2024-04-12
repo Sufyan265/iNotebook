@@ -54,7 +54,7 @@ const Navbar = () => {
 
     return (
         <>
-            <LoadingBar color='#6eefcb' progress={progress} />
+            <LoadingBar color='#6eefcb' progress={progress} height={3} />
             <nav className="navbar navbar-expand-lg navbarStyle" style={{ backgroundColor: "rgb(243 163 48)" }} data-bs-theme="dark">
                 <div className="container-fluid">
                     <span className='listItemToggle' onClick={handleListToggle} >
