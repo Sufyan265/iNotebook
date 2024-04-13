@@ -8,7 +8,6 @@ const Login = (props) => {
     // const host = "http://localhost:5000";
     const host = "https://inotebook-backend-tau.vercel.app";
     let navigate = useNavigate();
-    // console.log(navigate)
     
     const { setProgress } = useContext(UserContext);
     const context = useContext(noteContext)

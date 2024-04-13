@@ -47,11 +47,10 @@ const Login = (props) => {
             // }
 
             if (user.success) {
-                // console.log(user)
-                // console.log("User Signed up")
                 // Save the auth token and redirect ↓ 
-                // localStorage.setItem("token", user.authToken)
-                navigate("/login");
+                localStorage.setItem("token", user.authToken)
+                navigate("/")
+                // navigate("/login");
                 showAlert("success", "Account created successfuly");
                 setProgress(80);
             } else {
