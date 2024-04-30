@@ -69,6 +69,7 @@ export const UserProvider = (props) => {
 
     return (
         <UserContext.Provider value={{
+            host,
             catchError,
             handleError,
             errorMessage,

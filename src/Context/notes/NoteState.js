@@ -4,9 +4,9 @@ import { UserContext } from './UserContext';
 
 const NoteState = (props) => {
     // const host = "http://localhost:5000";
-    const host = "https://inotebook-backend-tau.vercel.app";
+    // const host = "https://inotebook-backend-tau.vercel.app";
 
-    const { catchError, handleError, errorMessage, setProgress } = useContext(UserContext);
+    const { catchError, handleError, errorMessage, setProgress, host } = useContext(UserContext);
 
     // const notesInitial = [
     //     {
@@ -212,6 +212,7 @@ const NoteState = (props) => {
 
     return (
         <NoteContext.Provider value={{
+            host,
             notes,
             setNotes,
             newNote,
