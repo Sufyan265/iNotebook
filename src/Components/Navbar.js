@@ -5,11 +5,14 @@ import LoadingBar from 'react-top-loading-bar';
 
 import maleProfileLogo from "./Images/male-avatar.svg";
 import femaleProfileLogo from "./Images/female-avatar.svg";
+import noteContext from '../Context/notes/noteContext';
 
 const Navbar = () => {
     const context = useContext(UserContext)
     const { userData, progress } = context;
     const navigate = useNavigate();
+
+    const { setNewNote } = useContext(noteContext);
 
     let location = useLocation();
     const handleListToggle = () => {
@@ -21,7 +24,7 @@ const Navbar = () => {
             }
         }
     }
-
+    
     const token = localStorage.getItem("token");
     useEffect(() => {
         // Initialize tooltips
@@ -45,6 +48,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login")
+        setNewNote({ title: "", description: "" })
     }
 
     const toggleProfile = () => {

@@ -42,6 +42,10 @@
     width: 220px;
 }
 
+.listItemStyle {
+    cursor: pointer;
+}
+
 .listItemStyle p {
     font-size: 14px;
 }

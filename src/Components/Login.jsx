@@ -10,8 +10,7 @@ const Login = (props) => {
     let navigate = useNavigate();
     
     const { setProgress, host } = useContext(UserContext);
-    const context = useContext(noteContext)
-    const { catchError, handleError, } = context;
+    const { catchError, handleError, setNewNote } = useContext(noteContext);
     const { showAlert } = props;
 
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -42,6 +41,7 @@ const Login = (props) => {
                 // console.log(user)
                 showAlert("danger", user.error);
             }
+            setNewNote({ title: "", description: "" });
 
             handleError(false);
             setProgress(100);
