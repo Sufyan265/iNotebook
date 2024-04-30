@@ -48,7 +48,7 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem("token");
         navigate("/login")
-        setNewNote({ title: "", description: "" })
+        setNewNote({ title: "", description: "", id: "" })
     }
 
     const toggleProfile = () => {

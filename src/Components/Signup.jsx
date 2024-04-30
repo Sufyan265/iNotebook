@@ -61,7 +61,7 @@ const Login = (props) => {
                 }
                 showAlert("danger", user.error);
             }
-            setNewNote({ title: "", description: "" })
+            setNewNote({ title: "", description: "", id: "" })
             handleError(false)
             setProgress(100);
         } catch (error) {
