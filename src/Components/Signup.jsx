@@ -8,11 +8,11 @@ import { UserContext } from '../Context/notes/UserContext';
 
 const Login = (props) => {
     // const host = "http://localhost:5000";
-    // const host = "https://inotebook-backend-tau.vercel.app";
+    const host = "https://inotebook-backend-tau.vercel.app";
 
     let navigate = useNavigate();
 
-    const { setProgress, host } = useContext(UserContext);
+    const { setProgress } = useContext(UserContext);
     const { catchError, handleError, setNewNote } = useContext(noteContext);
     const { showAlert } = props;
 
